@@ -8,13 +8,13 @@ datasource db {
 }
 
 model journeys {
-  id                     BigInt   @id @unique @default(autoincrement())
+  id                     Int      @id @unique @default(autoincrement())
   departure              DateTime @db.Timestamptz(6)
   return                 DateTime @db.Timestamptz(6)
-  departure_station_id   BigInt
+  departure_station_id   Int
   departure_station_name String
-  return_station_id      BigInt
+  return_station_id      Int
   return_station_name    String
   covered_distance_m     Float
-  duration_s             BigInt
+  duration_s             Int
 }
