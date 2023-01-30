@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { Inter } from '@next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -12,6 +13,7 @@ export default function Home() {
 			<main className={inter.className}>
 				<div className='flex justify-center text-3xl'>BikeApp</div>
 			</main>
+			<Link href='/JourneyList'>Journeys</Link>
 		</>
 	);
 }
