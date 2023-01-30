@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Get variables from .env file
-load_dotenv('./.env')
+load_dotenv('../.env')
 url = os.getenv('SB_API')
 key = os.getenv('SB_KEY')
 
@@ -12,9 +12,9 @@ key = os.getenv('SB_KEY')
 supabase = create_client(url, key)
 
 # Read the data from CSV files
-data_may = pd.read_csv('data/2021-05.csv')
-data_june = pd.read_csv('data/2021-06.csv')
-data_july = pd.read_csv('data/2021-07.csv')
+data_may = pd.read_csv('2021-05.csv')
+data_june = pd.read_csv('2021-06.csv')
+data_july = pd.read_csv('2021-07.csv')
 
 # Combine CSVs into one dataframe
 df = pd.concat([data_may, data_june, data_july])
