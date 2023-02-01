@@ -1,8 +1,25 @@
 import { InferGetStaticPropsType } from 'next';
 import { prisma } from 'prisma/connectPrisma';
+import { useState } from 'react';
 import { Journey } from 'types';
 
 export default function Journeys({ journeyList }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const [filter, setFilter] = useState('');
+	const [filteredJourneys, setFilteredJourneys] = useState(journeyList);
+
+	const handleSearch = (event: any) => {
+		setFilter(event.target.value);
+
+		setFilteredJourneys(
+			journeyList.filter((journey) => {
+				return (
+					journey.departure_station_name.toLowerCase().includes(filter.toLowerCase()) ||
+					journey.return_station_name.toLowerCase().includes(filter.toLowerCase())
+				);
+			})
+		);
+	};
+
 	return (
 		<div className='h-screen bg-slate-900 text-white'>
 			<div className='flex justify-center pt-5 text-3xl'>Journeys</div>
@@ -11,7 +28,9 @@ export default function Journeys({ journeyList }: InferGetStaticPropsType<typeof
 				<form>
 					<input
 						placeholder='Search...'
-						className='block w-60 rounded-lg border border-gray-600 bg-gray-700 p-2 text-center text-sm text-gray-900 hover:bg-gray-600'
+						value={filter}
+						onChange={handleSearch}
+						className='block w-60 rounded-lg border border-gray-600 bg-gray-700 p-2 text-center text-white outline-none hover:bg-gray-600 focus:border-sky-400 focus:drop-shadow-md'
 					></input>
 				</form>
 			</div>
@@ -27,7 +46,7 @@ export default function Journeys({ journeyList }: InferGetStaticPropsType<typeof
 						</tr>
 					</thead>
 					<tbody>
-						{journeyList.map((journey) => (
+						{filteredJourneys.map((journey) => (
 							<tr key={journey.id} className='hover:bg-slate-800'>
 								<td className='px-6 py-2'>{journey.departure_station_name}</td>
 								<td className='px-6 py-2'>{journey.return_station_name}</td>
