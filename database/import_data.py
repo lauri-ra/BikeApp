@@ -45,7 +45,7 @@ df = df[df['covered_distance_m'] > 10]
 #data = df.to_dict(orient='records')
 
 # Sample data for testing purposes
-testdf = df.head(10)
+testdf = df.head(35)
 testdata = testdf.to_dict(orient='records')
 
 # Push the dict to the database
